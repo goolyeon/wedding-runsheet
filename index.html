@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM & FAYE WEDDING CEREMONY - Run Sheet</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Prompt & Noto Serif Thai -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- QRCode.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wedding: {
+                            50: '#fdfbf7',
+                            100: '#f7f0e6',
+                            200: '#eddcc9',
+                            300: '#dfc2a6',
+                            500: '#b88960',
+                            600: '#9e6e47',
+                            800: '#5c3e27',
+                            gold: '#c5a059',
+                            rose: '#e8b4b8',
+                            bg: '#faf6f0'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                        serif: ['Noto Serif Thai', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f7f3ed;
+            font-family: 'Prompt', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .serif-title {
+            font-family: 'Noto Serif Thai', serif;
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 24px;
+            bottom: 10px;
+            width: 2px;
+            background-color: #e5d8cb;
+            z-index: 0;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased pb-12">
+
+    <!-- Sticky Header & Tab Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-wedding-200 shadow-sm">
+        <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-wedding-gold text-xl"><i class="fa-solid fa-rings-wedding"></i></span>
+                <span class="font-bold text-wedding-800 text-lg tracking-wide">AM & FAYE</span>
+            </div>
+            <div class="text-xs font-medium px-2.5 py-1 bg-wedding-100 text-wedding-800 rounded-full border border-wedding-200">
+                8 ส.ค. 2569
+            </div>
+        </div>
+        
+        <!-- Navigation Bar -->
+        <nav class="max-w-md mx-auto px-2 flex justify-around text-xs font-medium border-t border-slate-100 bg-wedding-50">
+            <button onclick="switchTab('timeline')" id="tab-timeline" class="py-2.5 px-3 text-wedding-600 border-b-2 border-wedding-600 font-semibold flex items-center gap-1.5 transition-all">
+                <i class="fa-regular fa-clock"></i> กำหนดการ
+            </button>
+            <button onclick="switchTab('team')" id="tab-team" class="py-2.5 px-3 text-slate-500 border-b-2 border-transparent hover:text-wedding-600 flex items-center gap-1.5 transition-all">
+                <i class="fa-solid fa-users"></i> แผนผังทีมงาน
+            </button>
+            <button onclick="switchTab('venue')" id="tab-venue" class="py-2.5 px-3 text-slate-500 border-b-2 border-transparent hover:text-wedding-600 flex items-center gap-1.5 transition-all">
+                <i class="fa-solid fa-map-location-dot"></i> สถานที่ & QR
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-md mx-auto px-4 pt-4">
+
+        <!-- Hero Card -->
+        <div class="bg-gradient-to-br from-white via-wedding-50 to-wedding-100 rounded-2xl p-5 border border-wedding-200 shadow-sm mb-5 text-center relative overflow-hidden">
+            <div class="absolute -right-6 -bottom-6 text-wedding-200 opacity-40 text-8xl pointer-events-none">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            
+            <p class="text-xs uppercase tracking-widest text-wedding-600 font-semibold mb-1">WEDDING CEREMONY RUN SHEET</p>
+            <h1 class="text-2xl font-bold text-wedding-800 serif-title mb-1">คุณแอม <span class="text-wedding-rose">❤️</span> คุณเฟ</h1>
+            <p class="text-xs text-slate-600 mb-4">วันเสาร์ที่ 8 สิงหาคม 2569</p>
+
+            <!-- Quick Info Grid -->
+            <div class="grid grid-cols-2 gap-2 text-left bg-white/80 rounded-xl p-3 border border-wedding-100 text-xs shadow-xs">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-wedding-100 text-wedding-600 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-medium">สถานที่</div>
+                        <div class="font-medium text-slate-700 truncate">อ.เมืองนครปฐม</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-wedding-100 text-wedding-600 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-medium">จำนวนแขก</div>
+                        <div class="font-medium text-slate-700">ประมาณ 120 คน</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-wedding-100 text-wedding-600 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-medium">ทีมช่างภาพ</div>
+                        <div class="font-medium text-slate-700">1 คน</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-wedding-100 text-wedding-600 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-medium">รูปแบบงาน</div>
+                        <div class="font-medium text-slate-700 truncate">พิธีเช้า • เลี้ยงเที่ยง</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-3 text-[11px] text-wedding-800 bg-wedding-200/50 py-1.5 px-3 rounded-lg flex items-center justify-center gap-1">
+                ☕ ขันหมาก • สู่ขอ • สวมแหวน • รับไหว้ • อาหารกลางวัน
+            </div>
+        </div>
+
+        <!-- SECTION 1: TIMELINE -->
+        <section id="section-timeline" class="space-y-4">
+            
+            <div class="flex justify-between items-center mb-2 px-1">
+                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-list-check text-wedding-600"></i> ลำดับพิธีการ (Timeline)
+                </h2>
+                <span class="text-[11px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full">10 ขั้นตอน</span>
+            </div>
+
+            <div class="relative timeline-line space-y-4">
+
+                <!-- Item 1 -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-wedding-500 text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-house-gear text-[10px]"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2.5 py-0.5 rounded-md border border-wedding-100">
+                                06:00 - 08:00 น.
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-medium">Team Aye & Oil</span>
+                        </div>
+                        <h3 class="font-semibold text-slate-800 text-sm mt-1 mb-2">🏡 เตรียมสถานที่ & รายการของ</h3>
+                        <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-xs text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                            <div>✅ โต๊ะลงทะเบียน</div>
+                            <div>✅ เก้าอี้ผู้ใหญ่</div>
+                            <div>✅ ของรับไหว้ 25 ชุด</div>
+                            <div>✅ จุดถ่ายภาพครอบครัว</div>
+                            <div>✅ แหวน</div>
+                            <div>✅ สินสอด</div>
+                            <div>✅ พานขันหมาก</div>
+                            <div>✅ ซองประตูเงินประตูทอง</div>
+                            <div class="col-span-2 text-wedding-800 font-medium mt-0.5 pt-1 border-t border-slate-200">
+                                ☕ เค้ก / กาแฟ / ขนมไทย / น้ำดื่ม
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-wedding-500 text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-drum text-[10px]"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2.5 py-0.5 rounded-md border border-wedding-100">
+                                08:08 น.
+                            </span>
+                            <span class="text-[11px] text-amber-600 bg-amber-50 px-2 py-0.5 rounded font-medium">ฤกษ์ดี 🥁</span>
+                        </div>
+                        <h3 class="font-semibold text-slate-800 text-sm mt-1">ขบวนขันหมาก</h3>
+                        <p class="text-xs text-slate-600 mt-1">เจ้าบ่าวและขบวนขันหมากเคลื่อนเข้าสู่บ้าน</p>
+                        
+                        <!-- Photographer Checkpoint -->
+                        <div class="mt-2.5 bg-rose-50/60 border border-rose-100 rounded-lg p-2.5 text-xs text-slate-700">
+                            <div class="font-semibold text-rose-700 flex items-center gap-1 mb-1">
+                                <i class="fa-solid fa-camera"></i> ช่างภาพเก็บมุมสำคัญ:
+                            </div>
+                            <ul class="grid grid-cols-2 gap-1 text-[11px] text-slate-600">
+                                <li>• ภาพขบวน</li>
+                                <li>• ภาพเจ้าบ่าว</li>
+                                <li>• พานขันหมาก</li>
+                                <li>• ภาพรวมหน้าบ้าน</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-wedding-500 text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-key text-[10px]"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2.5 py-0.5 rounded-md border border-wedding-100">
+                                08:15 - 08:30 น.
+                            </span>
+                            <span class="text-[11px] text-slate-500 font-medium"><i class="fa-regular fa-clock"></i> ไม่เกิน 15 นาที</span>
+                        </div>
+                        <h3 class="font-semibold text-slate-800 text-sm mt-1">🎉 ประตูเงิน ประตูทอง</h3>
+                        <div class="mt-2 text-xs space-y-1 text-slate-600">
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-wedding-500"></i> 💌 มอบซอง</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-face-smile text-amber-500"></i> 😄 ถามตอบสนุก ๆ</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-door-open text-emerald-500"></i> 🎊 ผ่านประตูแต่ละด่าน</div>
+                            <div class="flex items-center gap-1.5 text-rose-600"><i class="fa-solid fa-camera"></i> 📸 เก็บภาพบรรยากาศและรอยยิ้ม</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-wedding-500 text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-hands-praying text-[10px]"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2.5 py-0.5 rounded-md border border-wedding-100">
+                            08:30 - 08:40 น.
+                        </span>
+                        <h3 class="font-semibold text-slate-800 text-sm mt-2">🙏 ไหว้บรรพบุรุษ</h3>
+                        <div class="mt-2 text-xs text-slate-600 grid grid-cols-2 gap-1.5">
+                            <div>🕯 จุดธูป</div>
+                            <div>🙏 กราบไหว้</div>
+                            <div>🌸 บอกกล่าวบรรพบุรุษ</div>
+                            <div>📸 ภาพครอบครัว</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-wedding-gold text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-ring text-[10px]"></i>
+                    </div>
+                    <div class="bg-gradient-to-r from-amber-50/50 to-white p-4 rounded-xl border border-amber-200/60 shadow-sm">
+                        <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-md border border-amber-200">
+                            08:40 - 09:10 น.
+                        </span>
+                        <h3 class="font-semibold text-slate-800 text-sm mt-2">💍 พิธีสู่ขอ & สวมแหวน</h3>
+                        <div class="mt-2.5 space-y-2 text-xs">
+                            <div class="flex items-start gap-2">
+                                <span class="font-mono font-semibold text-amber-700 bg-white px-1.5 rounded border border-amber-200">08:40</span>
+                                <span class="text-slate-700">👨‍💼 ผู้ใหญ่ฝ่ายเจ้าบ่าวกล่าวสู่ขอ</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="font-mono font-semibold text-amber-700 bg-white px-1.5 rounded border border-amber-200">08:50</span>
+                                <span class="text-slate-700">🎁 ส่งมอบสินสอด</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="font-mono font-semibold text-amber-700 bg-white px-1.5 rounded border border-amber-200">08:55</span>
+                                <span class="text-slate-700">👨‍👩‍👧 ผู้ใหญ่ฝ่ายเจ้าสาวตอบรับ</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="font-mono font-semibold text-amber-700 bg-white px-1.5 rounded border border-amber-200">09:00</span>
+                                <span class="font-bold text-wedding-800">💍 สวมแหวน (ไฮไลต์)</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="font-mono font-semibold text-amber-700 bg-white px-1.5 rounded border border-amber-200">09:05</span>
+                                <span class="text-slate-700">📸 ถ่ายภาพครอบครัวทั้งสองฝ่าย</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6 & 7 (Parallel Event Container) -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-wedding-500 text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-users-rectangle text-[10px]"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-4">
+                        
+                        <!-- Main: Wai Ceremony -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2.5 py-0.5 rounded-md border border-wedding-100">
+                                    09:10 - 10:40 น.
+                                </span>
+                                <span class="text-[11px] font-medium text-wedding-800">👨‍👩‍👧‍👦 ผู้ใหญ่ ~25 คิว</span>
+                            </div>
+                            <h3 class="font-semibold text-slate-800 text-sm mt-1">🙇 พิธีรับไหว้</h3>
+
+                            <div class="mt-2 bg-wedding-50/50 p-2.5 rounded-lg border border-wedding-100 text-xs">
+                                <div class="font-medium text-wedding-800 mb-1">ลำดับขั้นตอนต่อ 1 คิว:</div>
+                                <div class="text-[11px] text-slate-600 flex flex-wrap gap-1">
+                                    <span class="bg-white px-1.5 py-0.5 rounded border">1. เชิญผู้ใหญ่</span> ➔
+                                    <span class="bg-white px-1.5 py-0.5 rounded border">2. บ่าวสาวไหว้</span> ➔
+                                    <span class="bg-white px-1.5 py-0.5 rounded border">3. รับพร</span> ➔
+                                    <span class="bg-white px-1.5 py-0.5 rounded border">4. มอบของ</span> ➔
+                                    <span class="bg-white px-1.5 py-0.5 rounded border">5. ถ่ายรูป</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-2 text-xs text-slate-600 space-y-0.5">
+                                <div class="font-medium text-slate-700">ลำดับคิวผู้ใหญ่:</div>
+                                <div class="pl-2 border-l-2 border-wedding-300 space-y-0.5 text-[11px]">
+                                    <div><b>คิว 1:</b> พ่อแม่เจ้าสาว</div>
+                                    <div><b>คิว 2:</b> พ่อแม่เจ้าบ่าว</div>
+                                    <div><b>คิว 3:</b> ญาติเจ้าบ่าว</div>
+                                    <div><b>คิว 4:</b> ญาติเจ้าสาว</div>
+                                    <div><b>คิว 5-25:</b> ญาติผู้ใหญ่ตามลำดับ</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="border-dashed border-slate-200">
+
+                        <!-- Parallel: Guest Lounge -->
+                        <div class="bg-amber-50/40 p-3 rounded-lg border border-amber-100">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-bold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded">
+                                    ☕ 09:30 - 11:00 น.
+                                </span>
+                                <span class="text-[10px] text-amber-700 font-medium">ดำเนินคู่ขนาน</span>
+                            </div>
+                            <h4 class="font-semibold text-slate-800 text-xs">Guest Lounge (สำหรับแขกที่รอ)</h4>
+                            <div class="mt-1.5 grid grid-cols-2 gap-1 text-[11px] text-slate-600">
+                                <div>🍰 เค้ก</div>
+                                <div>☕ กาแฟ</div>
+                                <div>🥤 น้ำดื่ม</div>
+                                <div>🍡 ขขนมไทย</div>
+                                <div class="col-span-2 text-emerald-700 mt-0.5">📸 ถ่ายรูปสวน & พักผ่อนตามอัธยาศัย</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-wedding-500 text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-camera-retro text-[10px]"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2.5 py-0.5 rounded-md border border-wedding-100">
+                            10:40 - 11:00 น.
+                        </span>
+                        <h3 class="font-semibold text-slate-800 text-sm mt-2">📸 Family Photo Session</h3>
+                        <div class="mt-2 text-xs grid grid-cols-1 gap-1 text-slate-600">
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><b>Set 1:</b> 👰 พ่อแม่เจ้าสาว + บ่าวสาว</div>
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><b>Set 2:</b> 🤵 พ่อแม่เจ้าบ่าว + บ่าวสาว</div>
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><b>Set 3:</b> 👨‍👩‍👧 พ่อแม่ทั้งสองฝ่าย</div>
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><b>Set 4:</b> 👵 ญาติผู้ใหญ่ทั้งหมด</div>
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><b>Set 5:</b> 👫 พี่น้อง</div>
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><b>Set 6:</b> 🎉 เพื่อนสนิท</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-wedding-500 text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-utensils text-[10px]"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2.5 py-0.5 rounded-md border border-wedding-100">
+                            11:00 - 12:30 น.
+                        </span>
+                        <h3 class="font-semibold text-slate-800 text-sm mt-2">🍽️ Lunch Reception (อาหารกลางวัน)</h3>
+                        <div class="mt-2 text-xs space-y-1.5 text-slate-600">
+                            <div class="flex items-start gap-1.5">
+                                <span class="font-bold text-wedding-800">11:00 น.</span>
+                                <span>🍽 เริ่มอาหารกลางวัน • 🎤 บ่าวสาวกล่าวขอบคุณแขก</span>
+                            </div>
+                            <div class="flex items-start gap-1.5">
+                                <span class="font-bold text-wedding-800">11:10 - 12:00 น.</span>
+                                <span>❤️ เดินทักทายแขก • 📸 ถ่ายภาพบรรยากาศ • 👨‍👩‍👧‍👦 พูดคุยกับญาติผู้ใหญ่</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 10 -->
+                <div class="relative pl-10">
+                    <div class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs shadow-sm z-10">
+                        <i class="fa-solid fa-check text-[10px]"></i>
+                    </div>
+                    <div class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-200/80 shadow-sm">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-md border border-emerald-200">
+                                12:30 น.
+                            </span>
+                            <span class="text-xs font-bold text-emerald-700">✅ ปิดงานสำเร็จ</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: TEAM ROLES -->
+        <section id="section-team" class="hidden space-y-4">
+            <div class="flex justify-between items-center mb-2 px-1">
+                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-sitemap text-wedding-600"></i> แผนผังทีมงานวันจริง
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-3">
+
+                <!-- อี๊หงา -->
+                <div class="bg-white p-4 rounded-xl border border-wedding-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-600"></div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-wedding-100 text-wedding-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">อี๊หงา</h3>
+                            <p class="text-[10px] text-wedding-600 font-medium">คุมภาพรวม & เวลา</p>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-1 pl-2 border-l border-slate-100">
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-clock text-amber-500 text-[10px]"></i> คุมเวลา</li>
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-bullhorn text-blue-500 text-[10px]"></i> เรียกคิวผู้ใหญ่</li>
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-camera text-rose-500 text-[10px]"></i> ประสานช่างภาพ</li>
+                    </ul>
+                </div>
+
+                <!-- OIL & AYE -->
+                <div class="bg-white p-4 rounded-xl border border-wedding-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-gold"></div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">OIL & AYE</h3>
+                            <p class="text-[10px] text-amber-700 font-medium">ดูแลพิธีรับไหว้ & ในบ้าน</p>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-1 pl-2 border-l border-slate-100">
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-list-ol text-wedding-600 text-[10px]"></i> คิวผู้ใหญ่รับไหว้</li>
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-gift text-purple-500 text-[10px]"></i> ดูแลของรับไหว้</li>
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-heart text-rose-400 text-[10px]"></i>ดูแลญาติฝั่งเจ้าสาว</li>
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-house text-emerald-500 text-[10px]"></i> ดูแลในบ้าน</li>
+                    </ul>
+                </div>
+
+                <!-- ทีมต้อนรับ -->
+                <div class="bg-white p-4 rounded-xl border border-wedding-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-sky-500"></div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-sky-100 text-sky-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">ทีมต้อนรับ</h3>
+                            <p class="text-[10px] text-sky-600 font-medium">ดูแลความเรียบร้อยของแขก</p>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-1 pl-2 border-l border-slate-100">
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-door-open text-sky-500 text-[10px]"></i> รับแขก</li>
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-chair text-amber-600 text-[10px]"></i> ดูแลที่นั่ง</li>
+                    </ul>
+                </div>
+
+                <!-- ทีมอาหาร -->
+                <div class="bg-white p-4 rounded-xl border border-wedding-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">ทีมอาหาร</h3>
+                            <p class="text-[10px] text-emerald-600 font-medium">ดูแลเครื่องดื่ม & ขนมทานเล่น</p>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-1 pl-2 border-l border-slate-100">
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-cake-candles text-pink-500 text-[10px]"></i> เค้ก</li>
+                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-cookie-bite text-amber-700 text-[10px]"></i> ขนมไทย</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: VENUE & SCANNABLE QR CODE -->
+        <section id="section-venue" class="hidden space-y-4">
+            
+            <div class="bg-white p-5 rounded-2xl border border-wedding-200 shadow-sm text-center">
+                <div class="w-10 h-10 rounded-full bg-wedding-100 text-wedding-600 flex items-center justify-center mx-auto mb-2 text-lg">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <h2 class="text-base font-bold text-slate-800 mb-1">สถานที่จัดงาน</h2>
+                <p class="text-xs text-slate-600 px-2 leading-relaxed">
+                    <b>บ้านเลขที่ 43 หมู่ 6</b><br>
+                    ต.มาบแค อ.เมืองนครปฐม จ.นครปฐม
+                </p>
+
+                <div class="my-5 p-4 bg-white rounded-xl border-2 border-slate-800 inline-block shadow-md relative">
+                    <!-- Clean Scannable QR Code Box -->
+                    <div id="qrcode-container" class="flex justify-center p-2 bg-white"></div>
+                    <p class="text-[11px] font-bold text-slate-800 mt-2 tracking-wider">SCAN FOR GOOGLE MAPS</p>
+                </div>
+
+                <div class="space-y-2">
+                    <a href="https://maps.app.goo.gl/NFq8hmvCaTxXByC9A?g_st=il" target="_blank" 
+                       class="block w-full py-2.5 px-4 bg-wedding-600 hover:bg-wedding-800 text-white rounded-xl font-medium text-xs shadow-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-diamond-turn-right"></i> เปิดนำทางด้วย Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <!-- Notice card -->
+            <div class="bg-amber-50/70 p-3.5 rounded-xl border border-amber-200 text-xs text-slate-700 space-y-1">
+                <div class="font-semibold text-amber-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-info"></i> คำแนะนำสำหรับการสแกน:
+                </div>
+                <p class="text-[11px] text-slate-600 leading-relaxed">
+                    QR Code ด้านบนถูกสร้างขึ้นตามสเปกมาตรฐานสากล (High Error Correction) มีพื้นที่ว่างรอบข้าง (Quiet Zone) ชัดเจน สามารถใช้กล้องมือถือสแกนตรงจากหน้าจอนี้ได้ทันที
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Bottom Action Bar for Mobile -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-wedding-200 py-2.5 px-4 z-40">
+        <div class="max-w-md mx-auto flex gap-2">
+            <button onclick="window.print()" class="flex-1 py-2 px-3 bg-wedding-100 hover:bg-wedding-200 text-wedding-800 rounded-lg text-xs font-medium transition-all flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-print"></i> พิมพ์ / เซฟ PDF
+            </button>
+            <button onclick="shareLink()" class="flex-1 py-2 px-3 bg-wedding-600 hover:bg-wedding-800 text-white rounded-lg text-xs font-medium transition-all flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-share-nodes"></i> คัดลอกลิงก์งาน
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Generate Standard Scannable QR Code
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const qrContainer = document.getElementById("qrcode-container");
+            qrContainer.innerHTML = ""; // Clear existing
+            new QRCode(qrContainer, {
+                text: "https://maps.app.goo.gl/NFq8hmvCaTxXByC9A?g_st=il",
+                width: 180,
+                height: 180,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            const tabs = ['timeline', 'team', 'venue'];
+            tabs.forEach(t => {
+                const section = document.getElementById(`section-${t}`);
+                const tabBtn = document.getElementById(`tab-${t}`);
+                
+                if (t === tabName) {
+                    section.classList.remove('hidden');
+                    tabBtn.classList.add('text-wedding-600', 'border-wedding-600', 'font-semibold');
+                    tabBtn.classList.remove('text-slate-500', 'border-transparent');
+                } else {
+                    section.classList.add('hidden');
+                    tabBtn.classList.remove('text-wedding-600', 'border-wedding-600', 'font-semibold');
+                    tabBtn.classList.add('text-slate-500', 'border-transparent');
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Share Link Function
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'AM & FAYE WEDDING CEREMONY - Run Sheet',
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('คัดลอกลิงก์เรียบร้อยแล้ว!');
+            }
+        }
+    </script>
+</body>
+</html>
