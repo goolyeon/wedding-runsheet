@@ -85,17 +85,17 @@
         
         <!-- Navigation Bar -->
         <nav class="max-w-md mx-auto px-2 flex justify-around text-xs font-medium border-t border-slate-100 bg-wedding-50">
+            <button onclick="switchTab('venue')" id="tab-venue" class="py-2.5 px-3 text-slate-500 border-b-2 border-transparent hover:text-wedding-600 flex items-center gap-1.5 transition-all">
+                <i class="fa-solid fa-map-location-dot"></i> สถานที่ & QR
+            </button>
             <button onclick="switchTab('timeline')" id="tab-timeline" class="py-2.5 px-3 text-wedding-600 border-b-2 border-wedding-600 font-semibold flex items-center gap-1.5 transition-all">
                 <i class="fa-regular fa-clock"></i> กำหนดการ
             </button>
             <button onclick="switchTab('team')" id="tab-team" class="py-2.5 px-3 text-slate-500 border-b-2 border-transparent hover:text-wedding-600 flex items-center gap-1.5 transition-all">
                 <i class="fa-solid fa-users"></i> แผนผังทีมงาน
             </button>
-            <button onclick="switchTab('venue')" id="tab-venue" class="py-2.5 px-3 text-slate-500 border-b-2 border-transparent hover:text-wedding-600 flex items-center gap-1.5 transition-all">
-                <i class="fa-solid fa-map-location-dot"></i> สถานที่ & QR
-            </button>
             <button onclick="switchTab('breakdown')" id="tab-breakdown" class="py-2.5 px-3 text-slate-500 border-b-2 border-transparent hover:text-wedding-600 flex items-center gap-1.5 transition-all">
-                <i class="fa-solid fa-file-lines"></i> สคริปต์พิธีการ
+                <i class="fa-solid fa-file-lines"></i> สคริปต์
             </button>
         </nav>
     </header>
@@ -161,8 +161,26 @@
             </div>
         </div>
 
+        <!-- SECTION: PASSWORD GATE (GLOBAL) -->
+        <section id="section-password" class="space-y-4">
+            <div class="bg-white p-6 rounded-2xl border border-wedding-200 shadow-sm text-center py-10">
+                <div class="w-12 h-12 rounded-full bg-amber-50 text-wedding-gold flex items-center justify-center mx-auto mb-3 text-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="font-bold text-slate-800 text-sm mb-1">พื้นที่สำหรับทีมงานและครอบครัว</h3>
+                <p class="text-xs text-slate-500 mb-4">กรุณากรอกรหัสผ่านเพื่อเข้าดู กำหนดการ แผนผังทีมงาน และสคริปต์พิธีการ</p>
+                <div class="flex gap-2 max-w-xs mx-auto">
+                    <input type="password" id="global-pass" placeholder="กรอกรหัสผ่าน" class="flex-1 px-3 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-wedding-600 text-center">
+                    <button onclick="checkPassword()" class="px-4 py-2 bg-wedding-600 hover:bg-wedding-800 text-white rounded-xl text-xs font-medium transition-all">
+                        ตกลง
+                    </button>
+                </div>
+                <p id="pass-error" class="text-xs text-red-500 mt-2 hidden">รหัสผ่านไม่ถูกต้อง ลองใหม่อีกครั้ง</p>
+            </div>
+        </section>
+
         <!-- SECTION 1: TIMELINE -->
-        <section id="section-timeline" class="space-y-4">
+        <section id="section-timeline" class="hidden space-y-4">
             
             <div class="flex justify-between items-center mb-2 px-1">
                 <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
@@ -460,7 +478,6 @@
                     <ul class="text-xs text-slate-600 space-y-1 pl-2 border-l border-slate-100">
                         <li class="flex items-center gap-1.5"><i class="fa-solid fa-clock text-amber-500 text-[10px]"></i> คุมเวลา</li>
                         <li class="flex items-center gap-1.5"><i class="fa-solid fa-bullhorn text-blue-500 text-[10px]"></i> เรียกคิวผู้ใหญ่</li>
-                        <li class="flex items-center gap-1.5"><i class="fa-solid fa-camera text-rose-500 text-[10px]"></i> ประสานช่างภาพ</li>
                     </ul>
                 </div>
 
@@ -562,207 +579,188 @@
 
         </section>
 
-        <!-- SECTION 4: BREAKDOWN (PROTECTED WITH PASSWORD) -->
+        <!-- SECTION 4: BREAKDOWN -->
         <section id="section-breakdown" class="hidden space-y-4">
             
-            <!-- หน้าจอใส่รหัสผ่านก่อนเข้าดู -->
-            <div id="password-gate" class="bg-white p-6 rounded-2xl border border-wedding-200 shadow-sm text-center py-10">
-                <div class="w-12 h-12 rounded-full bg-amber-50 text-wedding-gold flex items-center justify-center mx-auto mb-3 text-xl">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <h3 class="font-bold text-slate-800 text-sm mb-1">พื้นที่เฉพาะเจ้าบ่าว & ทีมรันคิว</h3>
-                <p class="text-xs text-slate-500 mb-4">กรุณากรอกรหัสผ่านเพื่อเข้าดูบทพูดและสคริปต์พิธีการ</p>
-                <div class="flex gap-2 max-w-xs mx-auto">
-                    <input type="password" id="script-pass" placeholder="กรอกรหัสผ่าน" class="flex-1 px-3 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-wedding-600 text-center">
-                    <button onclick="checkPassword()" class="px-4 py-2 bg-wedding-600 hover:bg-wedding-800 text-white rounded-xl text-xs font-medium transition-all">
-                        ตกลง
-                    </button>
-                </div>
-                <p id="pass-error" class="text-xs text-red-500 mt-2 hidden">รหัสผ่านไม่ถูกต้อง ลองใหม่อีกครั้ง</p>
+            <div class="bg-wedding-800 text-white p-4 rounded-xl shadow-xs">
+                <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-circle-info"></i> รายการของหมั้นที่ต้องพร้อม</h3>
+                <p class="text-[11px] text-wedding-100 mt-1">เงินสด / ถุงเงิน / ทองแท่ง / แหวน 2 วง / กำไล 2 ข้าง</p>
             </div>
-        
-            <!-- เนื้อหาสคริปต์ที่จะแสดงเมื่อรหัสผ่านถูกต้อง -->
-            <div id="breakdown-content" class="hidden space-y-4">
-                <div class="bg-wedding-800 text-white p-4 rounded-xl shadow-xs">
-                    <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-circle-info"></i> รายการของหมั้นที่ต้องพร้อม</h3>
-                    <p class="text-[11px] text-wedding-100 mt-1">เงินสด / ถุงเงิน / ทองแท่ง / แหวน 2 วง / กำไล 2 ข้าง</p>
+            
+            <!-- รายละเอียดขันหมาก & ประตูเงินประตูทอง -->
+            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-600"></div>
+                <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2 py-0.5 rounded">08:08 - 08:30 น.</span>
+                    <span class="text-[10px] text-slate-400 font-medium">ขบวนมินิมอล (รั้วหน้าบ้าน ➔ ตัวบ้าน)</span>
                 </div>
+                <h4 class="font-bold text-slate-800 text-sm mb-2">🥁 ขบวนขันหมาก & ประตูเงินประตูทองแบบมินิมอล</h4>
                 
-                <!-- รายละเอียดขันหมาก & ประตูเงินประตูทอง (วางแทรกใน breakdown-content ก่อนพิธีไหว้บรรพบุรุษ) -->
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-600"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2 py-0.5 rounded">08:08 - 08:30 น.</span>
-                        <span class="text-[10px] text-slate-400 font-medium">ขบวนมินิมอล (รั้วหน้าบ้าน ➔ ตัวบ้าน)</span>
-                    </div>
-                    <h4 class="font-bold text-slate-800 text-sm mb-2">🥁 ขบวนขันหมาก & ประตูเงินประตูทองแบบมินิมอล</h4>
+                <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 text-xs text-slate-600 space-y-3">
                     
-                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 text-xs text-slate-600 space-y-3">
-                        
-                        <!-- รูปแบบขบวนและยอดคนฝั่งเจ้าบ่าว -->
-                        <div class="bg-white p-3 rounded-xl border border-slate-200">
-                            <h5 class="font-bold text-wedding-800 mb-1.5 flex items-center gap-1">
-                                <i class="fa-solid fa-users"></i> ลำดับขบวนขันหมาก & จำนวนคนปฏิบัติหน้าที่ (รวม 6 คนหลัก)
-                            </h5>
-                            <p class="text-[10px] text-slate-500 mb-2">* ขบวนเน้นความเรียบง่าย ไม่มีกลองยาว ตั้งขบวนบริเวณรั้วทางเข้าบ้านแล้วเดินเข้าสู่ตัวบ้าน</p>
-                            <ul class="space-y-1 pl-2 text-[11px] text-slate-700 list-inside">
-                                <li>• <b>คนถือพานขันหมากเอก:</b> ญาติผู้ใหญ่ฝั่งเจ้าบ่าว <b>(1 คน)</b></li>
-                                <li>• <b>คนถือพานสินสอด (กล่องเงิน + กล่องทอง):</b> ญาติหรือเพื่อนสนิท <b>(1 คน)</b></li>
-                                <li>• <b>คนถือพานถุงเงิน (กล่องถุงเงิน):</b> ญาติหรือเพื่อนสนิท <b>(1 คน)</b></li>
-                                <li>• <b>คนถือต้นกล้วย:</b> เพื่อนเจ้าบ่าว <b>(1 คน)</b></li>
-                                <li>• <b>คนถือต้นอ้อย:</b> เพื่อนเจ้าบ่าว <b>(1 คน)</b></li>
-                                <li>• <b>คนถือซอง/ประคองกล่องแหวน:</b> เพื่อนสนิทเจ้าบ่าว คอยช่วยส่งซองให้เจ้าบ่าวแจกแจก <b>(1 คน)</b></li>
-                            </ul>
-                        </div>
-                
-                        <!-- รายละเอียดด่านกั้นประตู -->
-                        <div class="bg-white p-3 rounded-xl border border-slate-200">
-                            <h5 class="font-bold text-wedding-800 mb-1.5 flex items-center gap-1">
-                                <i class="fa-solid fa-door-closed"></i> พิธีการกั้นประตู (รวม 2 ด่านหลัก / ใช้คนกั้นด่านละ 2 คน)
-                            </h5>
-                            <div class="space-y-2.5 text-[11px] text-slate-600">
-                                <div class="border-b border-slate-100 pb-2">
-                                    <span class="font-semibold text-slate-800 block">🚪 ด่านที่ 1: ประตูเงิน (บริเวณหน้าประตูบ้าน)</span>
-                                    <p class="text-slate-500 mt-0.5">• <b>คนทำหน้าที่:</b> เพื่อนหรือญาติฝั่งเจ้าสาว <b>(2 คน)</b> ถือสายกั้น</p>
-                                    <p class="text-slate-500">• <b>สิ่งที่คุณเฟต้องทำ:</b> แจกซองประตูเงินให้คนกั้นคนละ 1 ซอง เพื่อขอผ่านทางเข้าบ้าน</p>
-                                </div>
-                                <div>
-                                    <span class="font-semibold text-slate-800 block">🚪 ด่านที่ 2: ประตูทอง (บริเวณก่อนเข้าห้องพิธี/ตัวบ้านชั้นใน)</span>
-                                    <p class="text-slate-500 mt-0.5">• <b>คนทำหน้าที่:</b> ญาติสนิทหรือพี่น้องฝั่งเจ้าสาว <b>(2 คน)</b> ถือสายกั้น</p>
-                                    <p class="text-slate-500">• <b>สิ่งที่คุณเฟต้องทำ:</b> ตอบคำถามสนุก ๆ เล็กน้อยจากด่านนี้ และแจกซองประตูทองให้คนละ 1 ซองเพื่อผ่านเข้าสู่พิธีสู่ขอ</p>
-                                </div>
+                    <!-- รูปแบบขบวนและยอดคนฝั่งเจ้าบ่าว -->
+                    <div class="bg-white p-3 rounded-xl border border-slate-200">
+                        <h5 class="font-bold text-wedding-800 mb-1.5 flex items-center gap-1">
+                            <i class="fa-solid fa-users"></i> ลำดับขบวนขันหมาก & จำนวนคน (รวม 6 คนหลัก)
+                        </h5>
+                        <p class="text-[10px] text-slate-500 mb-2">* ขบวนเน้นความเรียบง่าย ไม่มีกลองยาว ตั้งขบวนบริเวณรั้วทางเข้าบ้านแล้วเดินเข้าสู่ตัวบ้าน</p>
+                        <ul class="space-y-1 pl-2 text-[11px] text-slate-700 list-inside">
+                            <li>• <b>คนถือพานขันหมากเอก:</b> ญาติผู้ใหญ่ฝั่งเจ้าบ่าว <b>(1 คน)</b></li>
+                            <li>• <b>คนถือพานสินสอด (กล่องเงิน + กล่องทอง):</b> ญาติหรือเพื่อนสนิท <b>(1 คน)</b></li>
+                            <li>• <b>คนถือพานถุงเงิน:</b> ญาติหรือเพื่อนสนิท <b>(1 คน)</b></li>
+                            <li>• <b>คนถือต้นกล้วย:</b> เพื่อนเจ้าบ่าว <b>(1 คน)</b></li>
+                            <li>• <b>คนถือต้นอ้อย:</b> เพื่อนเจ้าบ่าว <b>(1 คน)</b></li>
+                            <li>• <b>คนถือซอง/ประคองกล่องแหวน:</b> เพื่อนสนิทเจ้าบ่าว <b>(1 คน)</b></li>
+                        </ul>
+                    </div>
+            
+                    <!-- รายละเอียดด่านกั้นประตู -->
+                    <div class="bg-white p-3 rounded-xl border border-slate-200">
+                        <h5 class="font-bold text-wedding-800 mb-1.5 flex items-center gap-1">
+                            <i class="fa-solid fa-door-closed"></i> พิธีการกั้นประตู (รวม 2 ด่านหลัก / ใช้คนกั้นด่านละ 2 คน)
+                        </h5>
+                        <div class="space-y-2.5 text-[11px] text-slate-600">
+                            <div class="border-b border-slate-100 pb-2">
+                                <span class="font-semibold text-slate-800 block">🚪 ด่านที่ 1: ประตูเงิน (บริเวณหน้าประตูบ้าน)</span>
+                                <p class="text-slate-500 mt-0.5">• <b>คนทำหน้าที่:</b> เพื่อนหรือญาติฝั่งเจ้าสาว <b>(2 คน)</b> ถือสายกั้น</p>
+                                <p class="text-slate-500">• <b>สิ่งที่คุณเฟต้องทำ:</b> แจกซองประตูเงินให้คนกั้นคนละ 1 ซอง เพื่อขอผ่านทางเข้าบ้าน</p>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-slate-800 block">🚪 ด่านที่ 2: ประตูทอง (บริเวณก่อนเข้าห้องพิธี/ตัวบ้านชั้นใน)</span>
+                                <p class="text-slate-500 mt-0.5">• <b>คนทำหน้าที่:</b> ญาติสนิทหรือพี่น้องฝั่งเจ้าสาว <b>(2 คน)</b> ถือสายกั้น</p>
+                                <p class="text-slate-500">• <b>สิ่งที่คุณเฟต้องทำ:</b> ตอบคำถามสนุก ๆ เล็กน้อยจากด่านนี้ และแจกซองประตูทองให้คนละ 1 ซองเพื่อผ่านเข้าสู่พิธีสู่ขอ</p>
                             </div>
                         </div>
-                
-                        <!-- Note ทริคหน้างาน -->
-                        <div class="bg-amber-50/70 p-2 rounded border border-amber-200 text-[10px] text-amber-900">
-                            <b>💡 ทริคสำหรับเจ้าบ่าว:</b> ตอนผ่านแต่ละด่าน ให้คนถือซองประเบียดส่งซองให้คุณเฟแจก และเมื่อผ่านด่านประตูทองเสร็จเรียบร้อยแล้ว ให้ทีมถือต้นกล้วยต้นอ้อยแยกนำไปวางไว้ในจุดที่จัดเตรียมไว้ ส่วนคนถือพานสินสอดและพานถุงเงินให้นำพานเข้ามาวางเรียงรอทำพิธีสู่ขอเวลา 08:40 น.
-                        </div>
-                
                     </div>
+            
+                    <!-- Note ทริคหน้างาน -->
+                    <div class="bg-amber-50/70 p-2 rounded border border-amber-200 text-[10px] text-amber-900">
+                        <b>💡 ทริคสำหรับเจ้าบ่าว:</b> ตอนผ่านแต่ละด่าน ให้คนถือซองประเบียดส่งซองให้คุณเฟแจก และเมื่อผ่านด่านประตูทองเสร็จเรียบร้อยแล้ว ให้ทีมถือต้นกล้วยต้นอ้อยแยกนำไปวางไว้ในจุดที่จัดเตรียมไว้ ส่วนคนถือพานสินสอดและพานถุงเงินให้นำพานเข้ามาวางเรียงรอทำพิธีสู่ขอเวลา 08:40 น.
+                    </div>
+            
                 </div>
+            </div>
+            
+            <!-- พิธีไหว้บรรพบุรุษ -->
+            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-500"></div>
+                <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2 py-0.5 rounded">08:30 - 08:40 น.</span>
+                    <span class="text-[10px] text-slate-400 font-medium">บ่าวสาว & พ่อแม่เจ้าสาว</span>
+                </div>
+                <h4 class="font-bold text-slate-800 text-sm mb-2">🙏 พิธีไหว้บรรพบุรุษ</h4>
+                <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 text-xs text-slate-600 space-y-2">
+                    <p><b>ผู้พูดหลัก (พ่อหรือแม่เจ้าสาว):</b> จุดธูปแล้วนำกล่าวต่อหน้าบรรพบุรุษ</p>
+                    <blockquote class="border-l-2 border-wedding-300 pl-2 italic text-slate-700 bg-white p-2 rounded">
+                        "วันนี้เป็นวันมงคล วันแต่งงานของลูกแอมและลูกเฟ ขออัญเชิญบรรพบุรุษทุกท่าน มารับรู้และร่วมเป็นสักขีพยาน ขอให้ท่านช่วยอวยพรให้ชีวิตคู่ของแอมและเฟมีแต่ความสุขความเจริญ รักกันยั่งยืนนาน ร่มเย็นเป็นสุขด้วยเทิด"
+                    </blockquote>
+                </div>
+            </div>
+    
+            <!-- พิธีสู่ขอ & สวมแหวน -->
+            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-gold"></div>
+                <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">08:40 - 09:10 น.</span>
+                    <span class="text-[10px] text-slate-400 font-medium">ผู้ใหญ่ทั้ง 2 ฝ่าย</span>
+                </div>
+                <h4 class="font-bold text-slate-800 text-sm mb-3">💍 พิธีสู่ขอ & สวมแหวน (รายละเอียดสคริปต์)</h4>
                 
-                <!-- พิธีไหว้บรรพบุรุษ -->
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-500"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2 py-0.5 rounded">08:30 - 08:40 น.</span>
-                        <span class="text-[10px] text-slate-400 font-medium">บ่าวสาว & พ่อแม่เจ้าสาว</span>
-                    </div>
-                    <h4 class="font-bold text-slate-800 text-sm mb-2">🙏 พิธีไหว้บรรพบุรุษ</h4>
-                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 text-xs text-slate-600 space-y-2">
-                        <p><b>ผู้พูดหลัก (พ่อหรือแม่เจ้าสาว):</b> จุดธูปแล้วนำกล่าวต่อหน้าบรรพบุรุษ</p>
-                        <blockquote class="border-l-2 border-wedding-300 pl-2 italic text-slate-700 bg-white p-2 rounded">
-                            "วันนี้เป็นวันมงคล วันแต่งงานของลูกแอมและลูกเฟ ขออัญเชิญบรรพบุรุษทุกท่าน มารับรู้และร่วมเป็นสักขีพยาน ขอให้ท่านช่วยอวยพรให้ชีวิตคู่ของแอมและเฟมีแต่ความสุขความเจริญ รักกันยั่งยืนนาน ร่มเย็นเป็นสุขด้วยเทิด"
+                <div class="space-y-3 text-xs">
+                    <!-- สเตป 1 -->
+                    <div class="border-b border-slate-100 pb-2.5">
+                        <p class="font-semibold text-slate-700 mb-1">1. ผู้ใหญ่ฝ่ายเจ้าบ่าวกล่าวสู่ขอ (08:40 น.)</p>
+                        <blockquote class="border-l-2 border-amber-300 pl-2 italic text-slate-600 bg-slate-50 p-2 rounded">
+                            "วันนี้ถือเป็นฤกษ์งามยามดี วันมงคลของทั้งสองครอบครัว ดิฉัน/ผม ในฐานะตัวแทนฝ่ายเจ้าบ่าว ได้นำลูกชายคือ 'เฟ' พร้อมด้วยเครื่องสินสอดทองหมั้นมงคลเหล่านี้ มาสู่ขอ 'แอม' ให้มาเป็นลูกสะใภ้และร่วมสร้างครอบครัวด้วยกันอย่างเป็นทางการค่ะ/ครับ"
                         </blockquote>
                     </div>
-                </div>
-        
-                <!-- พิธีสู่ขอ & สวมแหวน -->
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-gold"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">08:40 - 09:10 น.</span>
-                        <span class="text-[10px] text-slate-400 font-medium">ผู้ใหญ่ทั้ง 2 ฝ่าย</span>
+                    <!-- สเตป 2 -->
+                    <div class="border-b border-slate-100 pb-2.5">
+                        <p class="font-semibold text-slate-700 mb-1">2. ส่งมอบสินสอด & ตรวจนับ (08:50 น.)</p>
+                        <p class="text-slate-500 mb-1">• เปิดฝากล่องไม้ฝาใสทั้ง 3 ใบออก โปรยข้าวตอกดอกไม้มงคลร่วมกัน</p>
+                        <blockquote class="border-l-2 border-amber-300 pl-2 italic text-slate-600 bg-slate-50 p-2 rounded">
+                            <b>แม่เจ้าสาวพูดตอนยกกล่องขึ้นอุ้ม:</b> "สินสอดครบถ้วนถูกต้อง เงินทองฟูเต็มกล่องงดงามมาก ขอให้ลูกทั้งสองเหลือกินเหลือใช้ งอกเงยร่ำรวยยิ่ง ๆ ขึ้นไปนะลูก"
+                        </blockquote>
                     </div>
-                    <h4 class="font-bold text-slate-800 text-sm mb-3">💍 พิธีสู่ขอ & สวมแหวน (รายละเอียดสคริปต์)</h4>
-                    
-                    <div class="space-y-3 text-xs">
-                        <!-- สเตป 1 -->
-                        <div class="border-b border-slate-100 pb-2.5">
-                            <p class="font-semibold text-slate-700 mb-1">1. ผู้ใหญ่ฝ่ายเจ้าบ่าวกล่าวสู่ขอ (08:40 น.)</p>
-                            <blockquote class="border-l-2 border-amber-300 pl-2 italic text-slate-600 bg-slate-50 p-2 rounded">
-                                "วันนี้ถือเป็นฤกษ์งามยามดี วันมงคลของทั้งสองครอบครัว ดิฉัน/ผม ในฐานะตัวแทนฝ่ายเจ้าบ่าว ได้นำลูกชายคือ 'เฟ' พร้อมด้วยเครื่องสินสอดทองหมั้นมงคลเหล่านี้ มาสู่ขอ 'แอม' ให้มาเป็นลูกสะใภ้และร่วมสร้างครอบครัวด้วยกันอย่างเป็นทางการค่ะ/ครับ"
-                            </blockquote>
-                        </div>
-                        <!-- สเตป 2 -->
-                        <div class="border-b border-slate-100 pb-2.5">
-                            <p class="font-semibold text-slate-700 mb-1">2. ส่งมอบสินสอด & ตรวจนับ (08:50 น.)</p>
-                            <p class="text-slate-500 mb-1">• เปิดฝากล่องไม้ฝาใสทั้ง 3 ใบออก โปรยข้าวตอกดอกไม้มงคลร่วมกัน</p>
-                            <blockquote class="border-l-2 border-amber-300 pl-2 italic text-slate-600 bg-slate-50 p-2 rounded">
-                                <b>แม่เจ้าสาวพูดตอนยกกล่องขึ้นอุ้ม:</b> "สินสอดครบถ้วนถูกต้อง เงินทองฟูเต็มกล่องงดงามมาก ขอให้ลูกทั้งสองเหลือกินเหลือใช้ งอกเงยร่ำรวยยิ่ง ๆ ขึ้นไปนะลูก"
-                            </blockquote>
-                        </div>
-                        <!-- สเตป 3 -->
-                        <div class="border-b border-slate-100 pb-2.5">
-                            <p class="font-semibold text-slate-700 mb-1">3. ผู้ใหญ่ฝ่ายเจ้าสาวตอบรับ (08:55 น.)</p>
-                            <blockquote class="border-l-2 border-amber-300 pl-2 italic text-slate-600 bg-slate-50 p-2 rounded">
-                                "ในเมื่อเห็นถึงความตั้งใจจริงของฝั่งเจ้าบ่าวและเฟ พ่อกับแม่ก็ยินดีและเต็มใจยกแอมให้ดูแล ขอให้ลูกทั้งสองรักกันและดูแลกันให้ดีที่สุดนับจากนี้นะลูก"
-                            </blockquote>
-                        </div>
-                        <!-- สเตป 4 -->
-                        <div>
-                            <p class="font-bold text-wedding-800 mb-1">4. สวมแหวนและเครื่องประดับ (09:00 น.)</p>
-                            <ul class="space-y-1.5 pl-2 text-slate-600 list-disc list-inside">
-                                <li><b>จังหวะ 1:</b> เจ้าบ่าวสวมแหวนให้เจ้าสาว (เจ้าสาวกราบตักเจ้าบ่าว)</li>
-                                <li><b>จังหวะ 2:</b> เจ้าสาวสวมแหวนให้เจ้าบ่าว (เจ้าบ่าวรับไหว้)</li>
-                                <li><b>จังหวะ 3:</b> เจ้าบ่าวสวมกำไลข้อมือทองคำ 2 อัน ให้เจ้าสาว (แนะนำสวมที่ข้อมือข้างซ้ายคู่กับแหวนเพื่อความสวยงามยามถ่ายรูป)</li>
-                            </ul>
-                            <p class="text-[11px] text-rose-500 mt-1 font-medium">* ทุกขั้นตอนให้ทำช้า ๆ เพื่อให้ช่างภาพซูมเจาะเก็บรายละเอียดเครื่องประดับ</p>
-                        </div>
+                    <!-- สเตป 3 -->
+                    <div class="border-b border-slate-100 pb-2.5">
+                        <p class="font-semibold text-slate-700 mb-1">3. ผู้ใหญ่ฝ่ายเจ้าสาวตอบรับ (08:55 น.)</p>
+                        <blockquote class="border-l-2 border-amber-300 pl-2 italic text-slate-600 bg-slate-50 p-2 rounded">
+                            "ในเมื่อเห็นถึงความตั้งใจจริงของฝั่งเจ้าบ่าวและเฟ พ่อกับแม่ก็ยินดีและเต็มใจยกแอมให้ดูแล ขอให้ลูกทั้งสองรักกันและดูแลกันให้ดีที่สุดนับจากนี้นะลูก"
+                        </blockquote>
+                    </div>
+                    <!-- สเตป 4 -->
+                    <div>
+                        <p class="font-bold text-wedding-800 mb-1">4. สวมแหวนและเครื่องประดับ (09:00 น.)</p>
+                        <ul class="space-y-1.5 pl-2 text-slate-600 list-disc list-inside">
+                            <li><b>จังหวะ 1:</b> เจ้าบ่าวสวมแหวนให้เจ้าสาว (เจ้าสาวกราบตักเจ้าบ่าว)</li>
+                            <li><b>จังหวะ 2:</b> เจ้าสาวสวมแหวนให้เจ้าบ่าว (เจ้าบ่าวรับไหว้)</li>
+                            <li><b>จังหวะ 3:</b> เจ้าบ่าวสวมกำไลข้อมือทองคำ 2 อัน ให้เจ้าสาว (แนะนำสวมที่ข้อมือข้างซ้ายคู่กับแหวนเพื่อความสวยงามยามถ่ายรูป)</li>
+                        </ul>
+                        <p class="text-[11px] text-rose-500 mt-1 font-medium">* ทุกขั้นตอนให้ทำช้า ๆ เพื่อให้ช่างภาพซูมเจาะเก็บรายละเอียดเครื่องประดับ</p>
                     </div>
                 </div>
+            </div>
+            
+            <!-- พิธีรับไหว้ & ถ่ายรูป -->
+            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-500"></div>
+                <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2 py-0.5 rounded">09:10 - 10:40 น.</span>
+                    <span class="text-[10px] text-slate-400 font-medium">เฉพาะผู้ใหญ่ในพิธี (คุมเวลาโดย อี๊หงา)</span>
+                </div>
+                <h4 class="font-bold text-slate-800 text-sm mb-2">🙇 พิธีรับไหว้ & ลำดับถ่ายรูป</h4>
                 
-                <!-- พิธีรับไหว้ & ถ่ายรูป -->
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-wedding-500"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-bold text-wedding-600 bg-wedding-50 px-2 py-0.5 rounded">09:10 - 10:40 น.</span>
-                        <span class="text-[10px] text-slate-400 font-medium">เฉพาะผู้ใหญ่ในพิธี (คุมเวลาโดย อี๊หงา)</span>
-                    </div>
-                    <h4 class="font-bold text-slate-800 text-sm mb-2">🙇 พิธีรับไหว้ & ลำดับถ่ายรูป</h4>
+                <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 text-xs text-slate-600 space-y-4">
                     
-                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 text-xs text-slate-600 space-y-4">
+                    <!-- ลำดับคิวรับไหว้ -->
+                    <div class="bg-white p-3 rounded-xl border border-slate-200">
+                        <h5 class="font-bold text-wedding-800 mb-1.5 flex items-center gap-1">
+                            <i class="fa-solid fa-hand-holding-heart"></i> ลำดับคิวรับไหว้ 
+                        </h5>
+                        <p class="text-[10px] text-slate-500 mb-2">* เฉพาะผู้ใหญ่ที่นั่งในพิธีสวมแหวนเท่านั้น รับไหว้เสร็จครบหมดก่อนถึงจะไปขั้นตอนถ่ายรูป</p>
                         
-                        <!-- ลำดับคิวรับไหว้ -->
-                        <div class="bg-white p-3 rounded-xl border border-slate-200">
-                            <h5 class="font-bold text-wedding-800 mb-1.5 flex items-center gap-1">
-                                <i class="fa-solid fa-hand-holding-heart"></i> ลำดับคิวรับไหว้ 
-                            </h5>
-                            <p class="text-[10px] text-slate-500 mb-2">* เฉพาะผู้ใหญ่ที่นั่งในพิธีสวมแหวนเท่านั้น รับไหว้เสร็จครบหมดก่อนถึงจะไปขั้นตอนถ่ายรูป</p>
-                            
-                            <div class="space-y-2.5">
-                                <div>
-                                    <p class="font-semibold text-slate-700 mb-1 flex items-center gap-1 text-[11px]">
-                                        <span class="w-2 h-2 rounded-full bg-amber-500"></span> 🔴 เฟสที่ 1: ฝั่งเจ้าบ่าว
-                                    </p>
-                                    <ol class="pl-4 list-decimal space-y-0.5 text-[11px] text-slate-600">
-                                        <li><b>คิว 1:</b> พ่อและแม่ของเจ้าบ่าว</li>
-                                        <li><b>คิว 2 - 4:</b> ญาติผู้ใหญ่ฝั่งเจ้าบ่าวที่นั่งในพิธี (เรียงตามอาวุโส)</li>
-                                    </ol>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-slate-700 mb-1 flex items-center gap-1 text-[11px]">
-                                        <span class="w-2 h-2 rounded-full bg-rose-400"></span> 🔵 เฟสที่ 2: ฝั่งเจ้าสาว
-                                    </p>
-                                    <ol class="pl-4 list-decimal space-y-0.5 text-[11px] text-slate-600">
-                                        <li><b>คิว 5:</b> พ่อและแม่ของเจ้าสาว</li>
-                                        <li><b>คิว 6 +:</b> ญาติผู้ใหญ่ฝั่งเจ้าสาวที่นั่งในพิธี (เรียงตามอาวุโส)</li>
-                                    </ol>
-                                </div>
+                        <div class="space-y-2.5">
+                            <div>
+                                <p class="font-semibold text-slate-700 mb-1 flex items-center gap-1 text-[11px]">
+                                    <span class="w-2 h-2 rounded-full bg-amber-500"></span> 🔴 เฟสที่ 1: ฝั่งเจ้าบ่าว
+                                </p>
+                                <ol class="pl-4 list-decimal space-y-0.5 text-[11px] text-slate-600">
+                                    <li><b>คิว 1:</b> พ่อและแม่ของเจ้าบ่าว</li>
+                                    <li><b>คิว 2 - 4:</b> ญาติผู้ใหญ่ฝั่งเจ้าบ่าวที่นั่งในพิธี (เรียงตามอาวุโส)</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-700 mb-1 flex items-center gap-1 text-[11px]">
+                                    <span class="w-2 h-2 rounded-full bg-rose-400"></span> 🔵 เฟสที่ 2: ฝั่งเจ้าสาว
+                                </p>
+                                <ol class="pl-4 list-decimal space-y-0.5 text-[11px] text-slate-600">
+                                    <li><b>คิว 5:</b> พ่อและแม่ของเจ้าสาว</li>
+                                    <li><b>คิว 6 +:</b> ญาติผู้ใหญ่ฝั่งเจ้าสาวที่นั่งในพิธี (เรียงตามอาวุโส)</li>
+                                </ol>
                             </div>
                         </div>
-                        <!-- ขั้นตอนในแต่ละคิวรับไหว้ -->
-                        <div class="space-y-1.5">
-                            <h5 class="font-bold text-slate-800 flex items-center gap-1">
-                                <i class="fa-solid fa-circle-play text-wedding-600"></i> ขั้นตอนต่อ 1 คิวรับไหว้:
-                            </h5>
-                            <div class="pl-2 border-l-2 border-wedding-300 text-[11px] text-slate-600 space-y-1">
-                                <p>• บ่าวสาวพนมมือไหว้ผู้ใหญ่ ➔ มอบซองทุนให้พร ➔ ยกมือไหว้ขอบคุณ ➔ มอบของรับไหว้ให้ผู้ใหญ่</p>
-                                <p class="text-[10px] text-amber-700 font-medium">* จังหวะนี้ช่างภาพจะเก็บรูปเฉพาะตอนทำพิธียังไม่รันคิวรูปกลุ่มใหญ่</p>
-                            </div>
+                    </div>
+                    <!-- ขั้นตอนในแต่ละคิวรับไหว้ -->
+                    <div class="space-y-1.5">
+                        <h5 class="font-bold text-slate-800 flex items-center gap-1">
+                            <i class="fa-solid fa-circle-play text-wedding-600"></i> ขั้นตอนต่อ 1 คิวรับไหว้:
+                        </h5>
+                        <div class="pl-2 border-l-2 border-wedding-300 text-[11px] text-slate-600 space-y-1">
+                            <p>• บ่าวสาวพนมมือไหว้ผู้ใหญ่ ➔ มอบซองทุนให้พร ➔ ยกมือไหว้ขอบคุณ ➔ มอบของรับไหว้ให้ผู้ใหญ่</p>
+                            <p class="text-[10px] text-amber-700 font-medium">* จังหวะนี้ช่างภาพจะเก็บรูปเฉพาะตอนทำพิธียังไม่รันคิวรูปกลุ่มใหญ่</p>
                         </div>
-                        <!-- แจ้งเตือนย้ายไปรันคิวถ่ายรูป -->
-                        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-[11px] space-y-1">
-                            <span class="font-bold text-emerald-800 block flex items-center gap-1">
-                                <i class="fa-solid fa-camera text-emerald-600"></i> 📸 ลำดับถัดไป: รันคิวถ่ายรูปครอบครัว & แขก
-                            </span>
-                            <p class="text-slate-600">เมื่อทำพิธีรับไหว้เสร็จสิ้นเรียบร้อยแล้ว แขกและญาติทั้งหมดจะย้ายไปร่วม **Family Photo Session (10:40 น.)** ตามเซตที่ระบุไว้ในรันดาวน์หลักทันที เพื่อความรวดเร็วและเป็นระเบียบ</p>
-                        </div>
-                        <!-- หน้าที่ทีมซัพพอร์ต -->
-                        <div class="bg-amber-50/60 p-2.5 rounded-lg border border-amber-100 text-[10px] text-slate-500">
-                            <b>ทีมงาน (Oil & Aye):</b> เตรียมของรับไหว้ให้พร้อมและคอยเก็บกระเป๋าซองเงินดักไว้ด้านหลังบ่าวสาวทันทีที่เปลี่ยนคิว
-                        </div>
+                    </div>
+                    <!-- แจ้งเตือนย้ายไปรันคิวถ่ายรูป -->
+                    <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-[11px] space-y-1">
+                        <span class="font-bold text-emerald-800 block flex items-center gap-1">
+                            <i class="fa-solid fa-camera text-emerald-600"></i> 📸 ลำดับถัดไป: รันคิวถ่ายรูปครอบครัว & แขก
+                        </span>
+                        <p class="text-slate-600">เมื่อทำพิธีรับไหว้เสร็จสิ้นเรียบร้อยแล้ว แขกและญาติทั้งหมดจะย้ายไปร่วม **Family Photo Session (10:40 น.)** ตามเซตที่ระบุไว้ในรันดาวน์หลักทันที เพื่อความรวดเร็วและเป็นระเบียบ</p>
+                    </div>
+                    <!-- หน้าที่ทีมซัพพอร์ต -->
+                    <div class="bg-amber-50/60 p-2.5 rounded-lg border border-amber-100 text-[10px] text-slate-500">
+                        <b>ทีมงาน (Oil & Aye):</b> เตรียมของรับไหว้ให้พร้อมและคอยเก็บกระเป๋าซองเงินดักไว้ด้านหลังบ่าวสาวทันทีที่เปลี่ยนคิว
                     </div>
                 </div>
             </div>
@@ -795,41 +793,63 @@
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
+            
+            // ให้หน้าเริ่มต้นแสดงผลเป็นแท็บกำหนดการ
+            switchTab('timeline');
         });
+
+        let isUnlocked = false; // ตัวแปรเก็บสถานะการปลดล็อก
+        const privateTabs = ['timeline', 'team', 'breakdown']; // รายชื่อแท็บที่ต้องใส่รหัส
+        let currentTab = 'timeline';
 
         // Tab Switching Logic
         function switchTab(tabName) {
-            const tabs = ['timeline', 'team', 'venue', 'breakdown']; // เพิ่ม breakdown เข้าไปในอาร์เรย์
+            currentTab = tabName;
+            const tabs = ['timeline', 'team', 'venue', 'breakdown']; 
+            
+            // 1. จัดการสีปุ่มบนเมนู
             tabs.forEach(t => {
-                const section = document.getElementById(`section-${t}`);
                 const tabBtn = document.getElementById(`tab-${t}`);
-                
                 if (t === tabName) {
-                    section.classList.remove('hidden');
                     tabBtn.classList.add('text-wedding-600', 'border-wedding-600', 'font-semibold');
                     tabBtn.classList.remove('text-slate-500', 'border-transparent');
                 } else {
-                    section.classList.add('hidden');
                     tabBtn.classList.remove('text-wedding-600', 'border-wedding-600', 'font-semibold');
                     tabBtn.classList.add('text-slate-500', 'border-transparent');
                 }
             });
+
+            // 2. ซ่อนเนื้อหาทุกอย่างก่อน
+            tabs.forEach(t => {
+                document.getElementById(`section-${t}`).classList.add('hidden');
+            });
+            const passwordSection = document.getElementById('section-password');
+            passwordSection.classList.add('hidden');
+
+            // 3. ตรวจสอบว่าแท็บที่กดเป็นส่วนตัวและปลดล็อกหรือยัง
+            if (privateTabs.includes(tabName) && !isUnlocked) {
+                passwordSection.classList.remove('hidden'); // แสดงหน้าใส่รหัส
+            } else {
+                document.getElementById(`section-${tabName}`).classList.remove('hidden'); // แสดงเนื้อหาปกติ
+            }
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // ฟังก์ชันตรวจสอบรหัสผ่าน
         function checkPassword() {
-            const passwordInput = document.getElementById('script-pass').value;
-            const gate = document.getElementById('password-gate');
-            const content = document.getElementById('breakdown-content');
+            const passwordInput = document.getElementById('global-pass').value;
             const errorMsg = document.getElementById('pass-error');
             
-            if (passwordInput === 'weddingamfaye') {
-                gate.classList.add('hidden');
-                content.classList.remove('hidden');
+            if (passwordInput === 'weddingamfaye') { // กำหนดรหัสผ่านตรงนี้
+                isUnlocked = true; // อัปเดตสถานะว่าปลดล็อกแล้ว
                 errorMsg.classList.add('hidden');
+                switchTab(currentTab); // สั่งโหลดหน้าปัจจุบันใหม่เพื่อเปิดเนื้อหา
             } else {
                 errorMsg.classList.remove('hidden');
             }
         }
+
         // Share Link Function
         function shareLink() {
             if (navigator.share) {
